@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { from } from 'rxjs';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { from, of, toArray } from 'rxjs';
 
 const BLOG_POSTS = [
   { title: 'Lorem Ipsum', id: 1 },
@@ -10,6 +10,16 @@ const BLOG_POSTS = [
 @Injectable()
 export class AppService {
   getBlogPosts() {
-    return from(BLOG_POSTS);
+    return from(BLOG_POSTS).pipe(toArray());
+  }
+
+  getBlogPost(postId: number) {
+    const blogPost = BLOG_POSTS.find(({ id }) => id === postId);
+
+    if (!blogPost) {
+      throw new NotFoundException();
+    }
+
+    return of(blogPost);
   }
 }
