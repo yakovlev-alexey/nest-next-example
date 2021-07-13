@@ -13,7 +13,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:next": "next dev",
-    "start:dev": "nest start --path ./tsconfig.server.json --watch",
+    "start:dev": "NODE_ENV=development nest start --path ./tsconfig.server.json --watch",
     "start:debug": "nest start --path ./tsconfig.server.json --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.tsx?\" --fix"
