@@ -1,6 +1,6 @@
-import { GetServerSideProps } from 'next';
 import Link from 'next/link';
 import { FC } from 'react';
+import { buildServerSideProps } from 'src/client/ssr/buildServerSideProps';
 import { BlogPost } from 'src/shared/types/blog-post';
 import { fetch } from 'src/shared/utils/fetch';
 
@@ -21,10 +21,10 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<THomeProps> = async () => {
+export const getServerSideProps = buildServerSideProps<THomeProps>(async () => {
   const blogPosts = await fetch('/api/blog-posts');
 
-  return { props: { blogPosts } };
-};
+  return { blogPosts };
+});
 
 export default Home;
