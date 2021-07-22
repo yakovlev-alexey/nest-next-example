@@ -20,7 +20,7 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
           {linkFeature ? (
             <>
               {title}
-              <Link href={`${id}`}> Link</Link>
+              <Link href={`/${id}`}> Link</Link>
             </>
           ) : (
             <Link href={`/${id}`}>{title}</Link>

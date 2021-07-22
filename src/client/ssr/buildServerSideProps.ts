@@ -5,6 +5,7 @@ import {
   GetServerSideProps,
   GetServerSidePropsContext,
 } from 'src/shared/types/next';
+import { filterUnserializable } from './filterUnserializable';
 
 type StaticProps = {
   appData: Partial<AppData>;
@@ -25,9 +26,7 @@ const buildServerSideProps = <P, Q extends ParsedUrlQuery = ParsedUrlQuery>(
     return {
       props: {
         ...props,
-        appData: {
-          features,
-        },
+        appData: filterUnserializable({ features }) as StaticProps['appData'],
       },
     };
   };
