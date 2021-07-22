@@ -5,13 +5,13 @@ import {
   GetServerSideProps,
   GetServerSidePropsContext,
 } from 'src/shared/types/next';
-import { filterUnserializable } from './filterUnserializable';
+import { extractAppData } from './extractAppData';
 
 type StaticProps = {
   appData: Partial<AppData>;
 };
 
-type StaticQuery = {
+export type StaticQuery = {
   config: Config;
 };
 
@@ -19,14 +19,12 @@ const buildServerSideProps = <P, Q extends ParsedUrlQuery = ParsedUrlQuery>(
   getServerSideProps: (ctx: GetServerSidePropsContext<Q>) => Promise<P>,
 ): GetServerSideProps<StaticProps & P, Partial<StaticQuery> & Q> => {
   return async (ctx) => {
-    const { features } = ctx.query.config || {};
-
     const props = await getServerSideProps(ctx);
 
     return {
       props: {
         ...props,
-        appData: filterUnserializable({ features }) as StaticProps['appData'],
+        appData: extractAppData(ctx),
       },
     };
   };
