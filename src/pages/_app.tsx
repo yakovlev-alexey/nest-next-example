@@ -1,9 +1,25 @@
-import { FC } from 'react';
+import NextApp, { AppProps } from 'next/app';
+import { AppDataContext } from 'src/client/ssr/appData';
+import { AppData } from 'src/shared/types/app-data';
 
-import { AppProps } from 'next/app';
+class App extends NextApp<AppProps> {
+  appData: AppData;
 
-const App: FC<AppProps> = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
-};
+  constructor(props: AppProps) {
+    super(props);
+
+    this.appData = props.pageProps.appData || {};
+  }
+
+  render() {
+    const { Component, pageProps } = this.props;
+
+    return (
+      <AppDataContext.Provider value={this.appData}>
+        <Component {...pageProps} />
+      </AppDataContext.Provider>
+    );
+  }
+}
 
 export default App;
