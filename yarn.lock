@@ -3134,10 +3134,9 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-nest-next@^9.4.0:
+"nest-next@https://github.com/yakovlev-alexey/nest-next/tarball/base-path-dist":
   version "9.4.0"
-  resolved "https://registry.yarnpkg.com/nest-next/-/nest-next-9.4.0.tgz#a4d5e3c9c25d1a4eb2dd2e6b266c29c6a1bc6fda"
-  integrity sha512-uM11kyNGHjUKJXmQduqljS/NO9cS8JtVQu/21CPbHBpRiL1bgoLmODk253vHKsDFP1/nNrGUJ1lH5XShvFa6rg==
+  resolved "https://github.com/yakovlev-alexey/nest-next/tarball/base-path-dist#a2973704b424508d720c39c95d6c811e3c33d70e"
   dependencies:
     rxjs "^6.4"
 
