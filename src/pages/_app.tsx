@@ -1,6 +1,7 @@
 import NextApp, { AppProps } from 'next/app';
 import { AppDataContext } from 'src/client/ssr/appData';
 import { AppData } from 'src/shared/types/app-data';
+import { initializeFetch } from 'src/shared/utils/fetch';
 
 class App extends NextApp<AppProps> {
   appData: AppData;
@@ -9,6 +10,8 @@ class App extends NextApp<AppProps> {
     super(props);
 
     this.appData = props.pageProps.appData || {};
+
+    initializeFetch(this.appData.basePath);
   }
 
   render() {
