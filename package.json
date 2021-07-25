@@ -13,7 +13,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:next": "next dev",
-    "start:dev": "NODE_ENV=development nest start --path ./tsconfig.server.json --watch",
+    "start:dev": "NODE_ENV=development nest build --webpack --webpackPath webpack-hmr.config.js --watch --path tsconfig.server.json",
     "start:debug": "nest start --path ./tsconfig.server.json --debug --watch",
     "start:prod": "node dist/main",
     "start:proxy": "docker run --name nest-next-blog-proxy -v $(pwd)/nginx.conf:/etc/nginx/conf.d/default.conf:ro --add-host localnode:$(ifconfig en0 | grep inet | grep -v inet6 | awk '{print $2}') -p 8080:8080 -d nginx",
@@ -46,9 +46,12 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "prettier": "^2.3.2",
+    "run-script-webpack-plugin": "^0.0.11",
     "ts-loader": "^9.2.3",
     "ts-node": "^10.0.0",
     "tsconfig-paths": "^3.10.1",
-    "typescript": "^4.3.5"
+    "typescript": "^4.3.5",
+    "webpack": "^5.46.0",
+    "webpack-node-externals": "^3.0.0"
   }
 }
