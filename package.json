@@ -4,7 +4,7 @@
   "description": "",
   "author": "Alexey Yakovlev <alexeyyakovlev0359@gmail.com>",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "yarn build:next && yarn build:nest",
