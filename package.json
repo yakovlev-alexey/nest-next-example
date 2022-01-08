@@ -11,10 +11,12 @@
     "build:next": "next build",
     "build:nest": "nest build --path ./tsconfig.server.json",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
+    "start": "node dist/server/main.js",
     "start:next": "next dev",
     "start:dev": "NODE_ENV=development nest build --webpack --webpackPath webpack-hmr.config.js --watch --path tsconfig.server.json",
     "start:debug": "nest start --path ./tsconfig.server.json --debug --watch",
+    "start:docker": "docker run --rm -p 3000:3000 -p 7655:22 -it $(docker build --build-arg ssh_pub_key=\"$(cat ~/.ssh/id_rsa.pub)\" -q .)",
+    "start:ssh": "ssh -o StrictHostKeyChecking=no -L 9221:localhost:9229 root@localhost -p 7655",
     "start:prod": "node dist/main",
     "start:proxy": "docker run --name nest-next-blog-proxy -v $(pwd)/nginx.conf:/etc/nginx/conf.d/default.conf:ro --add-host localnode:$(ifconfig en0 | grep inet | grep -v inet6 | awk '{print $2}') -p 8080:8080 -d nginx",
     "lint": "eslint \"{src,apps,libs,test}/**/*.tsx?\" --fix"
