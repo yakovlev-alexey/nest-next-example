@@ -1,19 +1,19 @@
 const filterUnserializable = (
   obj: Record<string, unknown>,
   filteredValues: unknown[] = [undefined],
-): Record<string, unknown> => {
-  return Object.keys(obj).reduce<Record<string, unknown>>((ret, key) => {
-    if (typeof obj[key] === 'object' && obj[key] !== null) {
-      return {
-        ...ret,
-        [key]: filterUnserializable(obj[key] as Record<string, unknown>),
-      };
-    } else if (!filteredValues.includes(obj[key])) {
-      return { ...ret, [key]: obj[key] };
+) => {
+  Object.keys(obj).forEach((key) => {
+    if (filteredValues.includes(obj[key])) {
+      delete obj[key];
+      return;
     }
 
-    return ret;
-  }, {});
+    if (obj[key] === Object(obj[key]) && !Array.isArray(obj[key])) {
+      filterUnserializable(obj[key] as Record<string, unknown>, filteredValues);
+    }
+  });
+
+  return obj;
 };
 
 export { filterUnserializable };
