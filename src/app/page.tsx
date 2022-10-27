@@ -1,16 +1,16 @@
 import Link from 'next/link';
-import { FC } from 'react';
+import { getAppData } from 'src/client/data/appData';
 import { useFeature } from 'src/client/hooks/useFeatures';
-import { buildServerSideProps } from 'src/client/ssr/buildServerSideProps';
 import { BlogPost } from 'src/shared/types/blog-post';
 import { fetch } from 'src/shared/utils/fetch';
 
-type THomeProps = {
-  blogPosts: BlogPost[];
-};
+export default async function Home() {
+  console.log('get app data on home');
+  const { features } = await getAppData();
+  console.log('get app data on home finished');
+  const linkFeature = useFeature(features, 'blog_link');
 
-const Home: FC<THomeProps> = ({ blogPosts }) => {
-  const linkFeature = useFeature('blog_link');
+  const blogPosts = await fetch<BlogPost[]>('/api/blog-posts');
 
   return (
     <div>
@@ -29,12 +29,4 @@ const Home: FC<THomeProps> = ({ blogPosts }) => {
       ))}
     </div>
   );
-};
-
-export const getServerSideProps = buildServerSideProps<THomeProps>(async () => {
-  const blogPosts = await fetch('/api/blog-posts');
-
-  return { blogPosts };
-});
-
-export default Home;
+}

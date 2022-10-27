@@ -20,7 +20,10 @@ const getFetchUrl = (url: string) => {
   return url.startsWith('/') ? context.basePath + url : url;
 };
 
-const envAwareFetch = (url: string, options?: Partial<RequestInit>) => {
+const envAwareFetch = <T = unknown>(
+  url: string,
+  options?: Partial<RequestInit>,
+): Promise<T> => {
   const fetchUrl = getFetchUrl(url);
 
   return fetch(fetchUrl, options).then((res) => res.json());
