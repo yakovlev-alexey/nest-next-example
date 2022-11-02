@@ -197,12 +197,12 @@ export class RenderService {
       const res = isFastify ? response.res : response;
       const req = isFastify ? response.request.raw : response.req;
 
-      console.log('before if');
       if (req && res && renderer) {
         if (isFastify) {
           response.sent = true;
         }
 
+        console.log(req.params, view, getViewPath(view, req.params));
         return renderer(req, res, getViewPath(view, req.params), data);
       } else if (!renderer) {
         throw new InternalServerErrorException(

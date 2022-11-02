@@ -11,16 +11,16 @@ declare const module: any;
 export class AppModule {
   public static initialize(): DynamicModule {
     const renderModule =
-      module.hot?.data?.renderModule ??
+      // module.hot?.data?.renderModule ??
       RenderModule.forRootAsync(Next({ dev: NODE_ENV === 'development' }), {
         viewsDir: null,
       });
 
-    if (module.hot) {
-      module.hot.dispose((data: any) => {
-        data.renderModule = renderModule;
-      });
-    }
+    // if (module.hot) {
+    //   module.hot.dispose((data: any) => {
+    //     data.renderModule = renderModule;
+    //   });
+    // }
 
     return {
       module: AppModule,

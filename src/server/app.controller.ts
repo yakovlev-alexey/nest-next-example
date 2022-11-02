@@ -21,6 +21,13 @@ export class AppController {
     return {};
   }
 
+  @Get('/about/**')
+  @Render('about/[...all]')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  about() {
+    return {};
+  }
+
   @Get('/:id')
   @Render('[id]')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
