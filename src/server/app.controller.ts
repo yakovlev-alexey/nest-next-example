@@ -21,8 +21,29 @@ export class AppController {
     return {};
   }
 
-  @Get(':id')
+  @Get('/about/**')
+  @Render('about/[...all]')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  about() {
+    return {};
+  }
+
+  @Get('/:id')
   @Render('[id]')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  public post() {
+    return {};
+  }
+
+  @Get('/blog-posts')
+  @Render('blog-posts')
+  @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
+  blogPosts() {
+    return {};
+  }
+
+  @Get('/blog-posts/:id')
+  @Render('blog-posts/[id]')
   @UseInterceptors(ParamsInterceptor, ConfigInterceptor)
   public blogPost() {
     return {};
