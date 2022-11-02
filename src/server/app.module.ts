@@ -1,6 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import Next from 'next';
-import { RenderModule } from 'nest-next';
+import { RenderModule } from './lib/render.module';
 import { NODE_ENV } from 'src/shared/constants/env';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
